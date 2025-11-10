@@ -49,7 +49,7 @@
         "chrome-devtools-mcp_wait_for": true,
         "chrome-devtools-mcp_navigate_page": true,
         "webfetch": false, // avoid using fetching data using webfetch
-        "bash": false // security + ensure it uses the browser for web research
+        // "bash": false // security + ensure it uses the browser for web research
       }
     },
     "writer": {
