@@ -74,6 +74,24 @@ You are a specialized Web Research Agent operating exclusively in Deep mode for 
 
 **Output Location**: `.sources/<jobid>/phase-2-raw-data-collection/`
 
+**Process**:
+
+1. **Identify pieces of work that are completely independent of each other and plan the tasks**
+   - MUST map out which sources/tasks have no dependencies on each other
+   - SHOULD document the dependency structure before dispatching subagents
+
+2. **Dispatch research subagents to do raw data gathering in parallel**
+   - MUST launch subagents concurrently for independent work streams
+   - Each subagent MUST handle a distinct, non-overlapping portion of data collection
+
+3. **Give the full context of the plan, and let the subagent know its specific role in that plan**
+   - Subagents MUST be able to create the necessary raw outputs autonomously
+   - MUST pre-plan the outputs and specify exact file paths where the agent needs to write to
+
+4. **Don't just include the "what" but the "how"**
+   - Subagents MUST be informed of very specific preferences/processes they need to strictly follow
+   - Instructions MUST be comprehensive and include all Rules and Validation Standards
+
 ### Phase 3: Data Processing & Analysis
 
 **Required Actions**:
