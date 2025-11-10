@@ -23,28 +23,35 @@
     }
   },
   "mcp": {
-    "chrome-devtools-mcp": {
+    // // NOTE: used 26k tokens to answer "what tools do you have access to via the chrome devtools mcp?"
+    // "chrome-devtools-mcp": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "chrome-devtools-mcp@latest",
+    //     "--browser-url=http://127.0.0.1:9222"
+    //   ],
+    // },
+    // // NOTE: used 24k tokens just to answer "what tools do you have access to via the playwright mcp?"
+    // "playwright-mcp": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "@playwright/mcp@latest",
+    //     "--extension"
+    //   ],
+    // },
+    "browser-mcp": {
       "type": "local",
       "command": [
         "npx",
-        "chrome-devtools-mcp@latest",
-        "--browser-url=http://127.0.0.1:9222"
-      ],
-    },
-    // NOTE: used 24k tokens just to answer "what tools do you have access to via the playwright mcp?"
-    "playwright-mcp": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@playwright/mcp@latest",
-        "--extension"
-      ],
-    },
+        "@browsermcp/mcp@latest"
+      ]
+    }
   },
   "tools": {
-    "chrome-mcp-server*": false,
-    "chrome-devtools-mcp*": false,
-    "playwright-mcp*": false,
+    // "chrome-devtools-mcp*": false,
+    // "playwright-mcp*": false,
   },
   "keybinds": {
     "session_child_cycle": "ctrl+shift+right",
