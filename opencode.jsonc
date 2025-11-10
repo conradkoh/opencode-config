@@ -16,11 +16,10 @@
       "mode": "primary",
       "model": "opencode/big-pickle"
     },
-    "research": {
+    "deep-research": {
       "mode": "all",
-      "model": "github-copilot/claude-sonnet-4.5",
       "description": "An agent specilized in browsing the web.",
-      "prompt": "file:./prompts.researcher.txt",
+      "prompt": "file:./prompts/deep-research.md",
       "tools": {
         "playwright-mcp_*": true,
         "webfetch": false, // avoid using fetching data using webfetch
