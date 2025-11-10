@@ -21,7 +21,7 @@
       "description": "An agent specilized in browsing the web.",
       "prompt": "file:./prompts/deep-research.md",
       "tools": {
-        "playwright-mcp_*": true,
+        // "playwright-mcp_*": true,
         "webfetch": false, // avoid using fetching data using webfetch
         "bash": false // security + ensure it uses the browser for web research
       }
@@ -33,17 +33,17 @@
     }
   },
   "mcp": {
-    "playwright-mcp": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@playwright/mcp@latest",
-        "--extension"
-      ],
-    },
+    // "playwright-mcp": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "@playwright/mcp@latest",
+    //     "--extension"
+    //   ],
+    // },
   },
   "tools": {
-    "playwright-mcp*": false,
+    // "playwright-mcp*": false,
   },
   "keybinds": {
     "session_child_cycle": "ctrl+shift+right",
