@@ -19,7 +19,7 @@
     "deep-research": {
       "mode": "all",
       "description": "An agent specilized in browsing the web.",
-      "prompt": "file:./prompts/deep-research.md",
+      "prompt": "{file:./prompts/deep-research.md}",
       "tools": {
         "chrome-devtools-mcp_list_pages": false, //disable listing of existing pages
         "chrome-devtools-mcp_click": true,
