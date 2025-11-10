@@ -21,7 +21,32 @@
       "description": "An agent specilized in browsing the web.",
       "prompt": "file:./prompts/deep-research.md",
       "tools": {
-        // "playwright-mcp_*": true,
+        "chrome-devtools-mcp_list_pages": false, //disable listing of existing pages
+        "chrome-devtools-mcp_click": true,
+        "chrome-devtools-mcp_close_page": true,
+        "chrome-devtools-mcp_drag": true,
+        "chrome-devtools-mcp_emulate": true,
+        "chrome-devtools-mcp_evaluate_script": true,
+        "chrome-devtools-mcp_fill": true,
+        "chrome-devtools-mcp_fill_form": true,
+        "chrome-devtools-mcp_get_console_message": true,
+        "chrome-devtools-mcp_get_network_request": true,
+        "chrome-devtools-mcp_handle_dialog": true,
+        "chrome-devtools-mcp_hover": true,
+        "chrome-devtools-mcp_list_console_messages": true,
+        "chrome-devtools-mcp_list_network_requests": true,
+        "chrome-devtools-mcp_new_page": true,
+        "chrome-devtools-mcp_performance_analyze_insight": true,
+        "chrome-devtools-mcp_performance_start_trace": true,
+        "chrome-devtools-mcp_performance_stop_trace": true,
+        "chrome-devtools-mcp_press_key": true,
+        "chrome-devtools-mcp_resize_page": true,
+        "chrome-devtools-mcp_select_page": true,
+        "chrome-devtools-mcp_take_screenshot": true,
+        "chrome-devtools-mcp_take_snapshot": true,
+        "chrome-devtools-mcp_upload_file": true,
+        "chrome-devtools-mcp_wait_for": true,
+        "chrome-devtools-mcp_navigate_page": true,
         "webfetch": false, // avoid using fetching data using webfetch
         "bash": false // security + ensure it uses the browser for web research
       }
@@ -33,6 +58,14 @@
     }
   },
   "mcp": {
+    "chrome-devtools-mcp": {
+      "type": "local",
+      "command": [
+        "npx",
+        "chrome-devtools-mcp@latest",
+        "--browser-url=http://127.0.0.1:9222"
+      ],
+    },
     // "playwright-mcp": {
     //   "type": "local",
     //   "command": [
@@ -43,7 +76,7 @@
     // },
   },
   "tools": {
-    // "playwright-mcp*": false,
+    "chrome-devtools-mcp_*": false
   },
   "keybinds": {
     "session_child_cycle": "ctrl+shift+right",
