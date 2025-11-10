@@ -31,6 +31,7 @@
         "--browser-url=http://127.0.0.1:9222"
       ],
     },
+    // NOTE: used 24k tokens just to answer "what tools do you have access to via the playwright mcp?"
     "playwright-mcp": {
       "type": "local",
       "command": [
