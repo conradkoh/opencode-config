@@ -50,6 +50,14 @@
         "chrome-devtools-mcp_navigate_page": true,
         "webfetch": false, // avoid using fetching data using webfetch
         // "bash": false // security + ensure it uses the browser for web research
+      },
+    },
+    "browse": {
+      "mode": "all",
+      "prompt": "{file:./prompts/browsing.md}",
+      "model": "github-copilot/claude-sonnet-4.5",
+      "tools": {
+        "chrome-devtools-mcp_*": true
       }
     },
     "writer": {
