@@ -57,7 +57,37 @@
       "prompt": "{file:./prompts/browsing.md}",
       "model": "github-copilot/claude-sonnet-4.5",
       "tools": {
-        "chrome-devtools-mcp_*": true
+        // CORE NAVIGATION & SNAPSHOT (ALWAYS ENABLED)
+        "chrome-devtools-mcp_navigate_page": true,
+        "chrome-devtools-mcp_new_page": true,
+        "chrome-devtools-mcp_list_pages": true,
+        "chrome-devtools-mcp_select_page": true,
+        "chrome-devtools-mcp_close_page": true,
+        "chrome-devtools-mcp_take_snapshot": true, // PRIMARY tool for reading pages
+        // INTERACTION TOOLS (ENABLED)
+        "chrome-devtools-mcp_click": true,
+        "chrome-devtools-mcp_fill": true,
+        "chrome-devtools-mcp_fill_form": true,
+        "chrome-devtools-mcp_hover": true,
+        "chrome-devtools-mcp_press_key": true,
+        "chrome-devtools-mcp_handle_dialog": true,
+        "chrome-devtools-mcp_wait_for": true,
+        "chrome-devtools-mcp_upload_file": true,
+        "chrome-devtools-mcp_drag": true,
+        // UTILITY TOOLS
+        "chrome-devtools-mcp_take_screenshot": true,
+        "chrome-devtools-mcp_resize_page": true,
+        "chrome-devtools-mcp_emulate": true,
+        // ADVANCED/DEBUGGING TOOLS (Optional - enable if needed)
+        "chrome-devtools-mcp_list_console_messages": true,
+        "chrome-devtools-mcp_get_console_message": true,
+        "chrome-devtools-mcp_list_network_requests": true,
+        "chrome-devtools-mcp_get_network_request": true,
+        "chrome-devtools-mcp_performance_start_trace": true,
+        "chrome-devtools-mcp_performance_stop_trace": true,
+        "chrome-devtools-mcp_performance_analyze_insight": true,
+        // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
+        "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
       }
     },
     "writer": {
