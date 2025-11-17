@@ -97,7 +97,7 @@
       }
     },
     "writer": {
-      "mode": "all",
+      "mode": "primary",
       "model": "opencode/kimi-k2",
       "description": "An agent specialized in writing well crafted words",
     }
