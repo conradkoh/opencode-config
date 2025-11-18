@@ -113,7 +113,7 @@ for SOURCE_PATH in "${SOURCE_PATHS[@]}"; do
 		fi
 		
 		if cp -r "$DEST"/* "$BACKUP_PATH/" 2>/dev/null; then
-			local file_count=$(find "$BACKUP_PATH" -type f | wc -l)
+			file_count=$(find "$BACKUP_PATH" -type f | wc -l)
 			log_success "Backup completed ($file_count files backed up)"
 		else
 			log_warn "Some files could not be backed up (non-fatal)"
@@ -134,7 +134,7 @@ for SOURCE_PATH in "${SOURCE_PATHS[@]}"; do
 	# Copy files from remote
 	log_info "Copying files from remote to destination..."
 	if cp -r "$SRC"/* "$DEST/"; then
-		local file_count=$(find "$DEST" -type f | wc -l)
+		file_count=$(find "$DEST" -type f | wc -l)
 		log_success "Files copied successfully ($file_count total files)"
 	else
 		log_error "Failed to copy files"
