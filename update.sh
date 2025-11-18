@@ -8,7 +8,6 @@ REMOTE_URL="https://github.com/conradkoh/opencode-config.git"
 SOURCE_PATHS=("command" "prompts")
 BACKUP_DIR=".backup"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-LOG_FILE=".update_$(date +%Y%m%d_%H%M%S).log"
 
 # Get the directory where this script is being run from
 WORK_DIR=$(pwd)
@@ -19,7 +18,7 @@ log() {
 	shift
 	local message="$@"
 	local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-	echo "[$timestamp] [$level] $message" | tee -a "$LOG_FILE"
+	echo "[$timestamp] [$level] $message"
 }
 
 log_info() {
@@ -53,7 +52,6 @@ log_info "=========================================="
 log_info "OpenCode Update Script Started"
 log_info "=========================================="
 log_info "Working directory: $WORK_DIR"
-log_info "Log file: $LOG_FILE"
 log_info "Remote URL: $REMOTE_URL"
 log_info "Source paths: ${SOURCE_PATHS[*]}"
 
@@ -63,7 +61,7 @@ TEMP_DIR=$(mktemp -d)
 log_info "Temporary directory created: $TEMP_DIR"
 
 log_info "Fetching latest files from remote: $REMOTE_URL"
-if git clone --depth 1 --filter=blob:none --sparse "$REMOTE_URL" "$TEMP_DIR" 2>&1 | tee -a "$LOG_FILE"; then
+if git clone --depth 1 --filter=blob:none --sparse "$REMOTE_URL" "$TEMP_DIR" 2>&1; then
 	log_success "Repository cloned successfully"
 else
 	log_error "Failed to clone repository"
@@ -72,7 +70,7 @@ fi
 
 log_info "Setting up sparse checkout for paths: ${SOURCE_PATHS[*]}"
 cd "$TEMP_DIR"
-if git sparse-checkout set "${SOURCE_PATHS[@]}" 2>&1 | tee -a "$LOG_FILE"; then
+if git sparse-checkout set "${SOURCE_PATHS[@]}" 2>&1; then
 	log_success "Sparse checkout configured"
 else
 	log_error "Failed to configure sparse checkout"
@@ -148,5 +146,4 @@ log_info "=========================================="
 log_success "Update completed successfully!"
 log_info "=========================================="
 log_info "Backup location: $BACKUP_PATH"
-log_info "Log file: $LOG_FILE"
 log_info "=========================================="
