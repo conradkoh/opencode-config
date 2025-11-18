@@ -23,7 +23,7 @@
       "model": "opencode/big-pickle"
     },
     "deep-research": {
-      "mode": "all",
+      "mode": "primary",
       "model": "github-copilot/claude-sonnet-4.5",
       "description": "An agent specilized in browsing the web.",
       "prompt": "{file:./prompts/deep-research.md}",
@@ -61,12 +61,12 @@
     "browse": {
       "mode": "all",
       "prompt": "{file:./prompts/browsing.md}",
-      "model": "github-copilot/claude-sonnet-4.5",
+      "model": "github-copilot/claude-haiku-4.5",
       "tools": {
         // CORE NAVIGATION & SNAPSHOT (ALWAYS ENABLED)
         "chrome-devtools-mcp_navigate_page": true,
         "chrome-devtools-mcp_new_page": true,
-        "chrome-devtools-mcp_list_pages": true,
+        "chrome-devtools-mcp_list_pages": false, // Disable listing of existing pages
         "chrome-devtools-mcp_select_page": true,
         "chrome-devtools-mcp_close_page": true,
         "chrome-devtools-mcp_take_snapshot": true, // PRIMARY tool for reading pages
@@ -94,6 +94,7 @@
         "chrome-devtools-mcp_performance_analyze_insight": true,
         // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
         "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
+        "webfetch": false, // disable webfetch tool
       }
     },
     "writer": {
