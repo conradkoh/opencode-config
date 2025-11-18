@@ -68,9 +68,9 @@ else
 	exit 1
 fi
 
-log_info "Setting up sparse checkout for paths: ${SOURCE_PATHS[*]}"
+log_info "Setting up sparse checkout for paths: ${SOURCE_PATHS[*]} and update.sh"
 cd "$TEMP_DIR"
-if git sparse-checkout set "${SOURCE_PATHS[@]}" 2>&1; then
+if git sparse-checkout set "${SOURCE_PATHS[@]}" update.sh 2>&1; then
 	log_success "Sparse checkout configured"
 else
 	log_error "Failed to configure sparse checkout"
@@ -78,6 +78,41 @@ else
 fi
 cd - > /dev/null
 log_info "Returned to working directory"
+
+# Self-update the script if it exists in working directory
+SCRIPT_NAME="update.sh"
+if [ -f "$WORK_DIR/$SCRIPT_NAME" ]; then
+	log_info "=========================================="
+	log_info "Self-updating script: $SCRIPT_NAME"
+	log_info "=========================================="
+	
+	SCRIPT_SRC="$TEMP_DIR/$SCRIPT_NAME"
+	SCRIPT_DEST="$WORK_DIR/$SCRIPT_NAME"
+	SCRIPT_BACKUP="$WORK_DIR/$BACKUP_DIR/$TIMESTAMP/$SCRIPT_NAME"
+	
+	if [ -f "$SCRIPT_SRC" ]; then
+		log_info "Creating backup of current script..."
+		mkdir -p "$(dirname "$SCRIPT_BACKUP")"
+		if cp "$SCRIPT_DEST" "$SCRIPT_BACKUP"; then
+			log_success "Script backup created at $SCRIPT_BACKUP"
+		else
+			log_warn "Failed to backup script (non-fatal)"
+		fi
+		
+		log_info "Updating script..."
+		if cp "$SCRIPT_SRC" "$SCRIPT_DEST"; then
+			chmod +x "$SCRIPT_DEST"
+			log_success "Script updated successfully"
+		else
+			log_error "Failed to update script"
+			exit 1
+		fi
+	else
+		log_warn "Script not found in remote repository, skipping self-update"
+	fi
+else
+	log_info "Script not found in working directory, skipping self-update"
+fi
 
 # Process each source path
 for SOURCE_PATH in "${SOURCE_PATHS[@]}"; do
