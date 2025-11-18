@@ -7,7 +7,7 @@ This repository contains shared OpenCode configuration files including custom co
 To install or update this configuration in your OpenCode setup, run the following command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/conradkoh/opencode-config/main/update.sh | bash
+curl -fsSL https://raw.githubusercontent.com/conradkoh/opencode-config/master/update.sh | bash
 ```
 
 Alternatively, you can clone this repository and run the update script manually:
