@@ -95,6 +95,7 @@
         // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
         "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
         "webfetch": false, // disable webfetch tool
+        "task": false // disable delegation
       }
     },
     "writer": {
