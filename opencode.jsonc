@@ -94,8 +94,8 @@
         "chrome-devtools-mcp_performance_analyze_insight": true,
         // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
         "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
-        "webfetch": false, // disable webfetch tool
-        "task": false // disable delegation
+        "webfetch*": false, // disable webfetch tool
+        "task*": false // disable delegation
       }
     },
     "writer": {
@@ -128,5 +128,50 @@
   "keybinds": {
     "session_child_cycle": "ctrl+shift+right",
     "session_child_cycle_reverse": "ctrl+shift+left",
+  },
+  "provider": {
+    "opencode": {
+      "blacklist": [
+        "qwen3-coder",
+        "claude-opus-4-1",
+        "kimi-k2",
+        "gpt-5.1-codex",
+        "claude-haiku-4-5",
+        "claude-opus-4-5",
+        "gemini-3-pro",
+        "claude-sonnet-4-5",
+        // "kimi-k2-thinking",
+        "gpt-5.1",
+        "gpt-5-nano",
+        "gpt-5-codex",
+        // "big-pickle",
+        "claude-3-5-haiku",
+        "glm-4.6",
+        "grok-code",
+        "claude-sonnet-4",
+        "gpt-5"
+      ]
+    },
+    "github-copilot": {
+      "blacklist": [
+        "grok-code-fast-1",
+        "gpt-5.1-codex",
+        // "claude-haiku-4.5",
+        "gemini-3-pro-preview",
+        "oswe-vscode-prime",
+        "gpt-5.1-codex-mini",
+        "gpt-5.1",
+        "gpt-5-codex",
+        "gpt-4o",
+        "gpt-4.1",
+        "claude-opus-41",
+        "gpt-5-mini",
+        "gemini-2.5-pro",
+        "claude-sonnet-4",
+        "gpt-5",
+        // "claude-opus-4.5",
+        // "claude-sonnet-4.5"
+      ]
+    }
   }
 }
