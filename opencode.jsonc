@@ -13,6 +13,7 @@
     "build": {
       "mode": "primary",
       "model": "github-copilot/claude-sonnet-4.5"
+      "prompt": "{file:./prompts/build.md}"
     },
     "tweak": {
       "mode": "primary",
