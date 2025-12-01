@@ -1,7 +1,7 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "tui": {
-    "scroll_speed": 6,
+    // "scroll_speed": 6,
     "scroll_acceleration": {
       "enabled": true
     }
@@ -12,7 +12,8 @@
     },
     "build": {
       "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4.5"
+      "model": "github-copilot/claude-sonnet-4.5",
+      // "model": "github-copilot/claude-opus-4.5",
       "prompt": "{file:./prompts/build.md}"
     },
     "tweak": {
@@ -23,87 +24,87 @@
       "mode": "primary",
       "model": "opencode/big-pickle"
     },
-    "deep-research": {
-      "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4.5",
-      "description": "An agent specilized in browsing the web.",
-      "prompt": "{file:./prompts/deep-research.md}",
-      "tools": {
-        "chrome-devtools-mcp_list_pages": false, //disable listing of existing pages
-        "chrome-devtools-mcp_click": true,
-        "chrome-devtools-mcp_close_page": true,
-        "chrome-devtools-mcp_drag": true,
-        "chrome-devtools-mcp_emulate": true,
-        "chrome-devtools-mcp_evaluate_script": true,
-        "chrome-devtools-mcp_fill": true,
-        "chrome-devtools-mcp_fill_form": true,
-        "chrome-devtools-mcp_get_console_message": true,
-        "chrome-devtools-mcp_get_network_request": true,
-        "chrome-devtools-mcp_handle_dialog": true,
-        "chrome-devtools-mcp_hover": true,
-        "chrome-devtools-mcp_list_console_messages": true,
-        "chrome-devtools-mcp_list_network_requests": true,
-        "chrome-devtools-mcp_new_page": true,
-        "chrome-devtools-mcp_performance_analyze_insight": true,
-        "chrome-devtools-mcp_performance_start_trace": true,
-        "chrome-devtools-mcp_performance_stop_trace": true,
-        "chrome-devtools-mcp_press_key": true,
-        "chrome-devtools-mcp_resize_page": true,
-        "chrome-devtools-mcp_select_page": true,
-        "chrome-devtools-mcp_take_screenshot": true,
-        "chrome-devtools-mcp_take_snapshot": true,
-        "chrome-devtools-mcp_upload_file": true,
-        "chrome-devtools-mcp_wait_for": true,
-        "chrome-devtools-mcp_navigate_page": true,
-        "webfetch": false, // avoid using fetching data using webfetch
-        // "bash": false // security + ensure it uses the browser for web research
-      },
-    },
-    "browse": {
-      "mode": "all",
-      "prompt": "{file:./prompts/browsing.md}",
-      "model": "github-copilot/claude-haiku-4.5",
-      "tools": {
-        // CORE NAVIGATION & SNAPSHOT (ALWAYS ENABLED)
-        "chrome-devtools-mcp_navigate_page": true,
-        "chrome-devtools-mcp_new_page": true,
-        "chrome-devtools-mcp_list_pages": false, // Disable listing of existing pages
-        "chrome-devtools-mcp_select_page": true,
-        "chrome-devtools-mcp_close_page": true,
-        "chrome-devtools-mcp_take_snapshot": true, // PRIMARY tool for reading pages
-        // INTERACTION TOOLS (ENABLED)
-        "chrome-devtools-mcp_click": true,
-        "chrome-devtools-mcp_fill": true,
-        "chrome-devtools-mcp_fill_form": true,
-        "chrome-devtools-mcp_hover": true,
-        "chrome-devtools-mcp_press_key": true,
-        "chrome-devtools-mcp_handle_dialog": true,
-        "chrome-devtools-mcp_wait_for": true,
-        "chrome-devtools-mcp_upload_file": true,
-        "chrome-devtools-mcp_drag": true,
-        // UTILITY TOOLS
-        "chrome-devtools-mcp_take_screenshot": true,
-        "chrome-devtools-mcp_resize_page": true,
-        "chrome-devtools-mcp_emulate": true,
-        // ADVANCED/DEBUGGING TOOLS (Optional - enable if needed)
-        "chrome-devtools-mcp_list_console_messages": true,
-        "chrome-devtools-mcp_get_console_message": true,
-        "chrome-devtools-mcp_list_network_requests": true,
-        "chrome-devtools-mcp_get_network_request": true,
-        "chrome-devtools-mcp_performance_start_trace": true,
-        "chrome-devtools-mcp_performance_stop_trace": true,
-        "chrome-devtools-mcp_performance_analyze_insight": true,
-        // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
-        "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
-        "webfetch*": false, // disable webfetch tool
-        "task*": false // disable delegation
-      }
-    },
     "writer": {
       "mode": "primary",
-      "model": "opencode/kimi-k2",
+      "model": "opencode/kimi-k2-thinking",
       "description": "An agent specialized in writing well crafted words",
-    }
+    },
+    // "deep-research": {
+    //   "mode": "primary",
+    //   "model": "github-copilot/claude-sonnet-4.5",
+    //   "description": "An agent specilized in browsing the web.",
+    //   "prompt": "{file:./prompts/deep-research.md}",
+    //   "tools": {
+    //     "chrome-devtools-mcp_list_pages": false, //disable listing of existing pages
+    //     "chrome-devtools-mcp_click": true,
+    //     "chrome-devtools-mcp_close_page": true,
+    //     "chrome-devtools-mcp_drag": true,
+    //     "chrome-devtools-mcp_emulate": true,
+    //     "chrome-devtools-mcp_evaluate_script": true,
+    //     "chrome-devtools-mcp_fill": true,
+    //     "chrome-devtools-mcp_fill_form": true,
+    //     "chrome-devtools-mcp_get_console_message": true,
+    //     "chrome-devtools-mcp_get_network_request": true,
+    //     "chrome-devtools-mcp_handle_dialog": true,
+    //     "chrome-devtools-mcp_hover": true,
+    //     "chrome-devtools-mcp_list_console_messages": true,
+    //     "chrome-devtools-mcp_list_network_requests": true,
+    //     "chrome-devtools-mcp_new_page": true,
+    //     "chrome-devtools-mcp_performance_analyze_insight": true,
+    //     "chrome-devtools-mcp_performance_start_trace": true,
+    //     "chrome-devtools-mcp_performance_stop_trace": true,
+    //     "chrome-devtools-mcp_press_key": true,
+    //     "chrome-devtools-mcp_resize_page": true,
+    //     "chrome-devtools-mcp_select_page": true,
+    //     "chrome-devtools-mcp_take_screenshot": true,
+    //     "chrome-devtools-mcp_take_snapshot": true,
+    //     "chrome-devtools-mcp_upload_file": true,
+    //     "chrome-devtools-mcp_wait_for": true,
+    //     "chrome-devtools-mcp_navigate_page": true,
+    //     "webfetch": false, // avoid using fetching data using webfetch
+    //     // "bash": false // security + ensure it uses the browser for web research
+    //   },
+    // },
+    // "browse": {
+    //   "mode": "all",
+    //   "prompt": "{file:./prompts/browsing.md}",
+    //   "model": "github-copilot/claude-haiku-4.5",
+    //   "tools": {
+    //     // CORE NAVIGATION & SNAPSHOT (ALWAYS ENABLED)
+    //     "chrome-devtools-mcp_navigate_page": true,
+    //     "chrome-devtools-mcp_new_page": true,
+    //     "chrome-devtools-mcp_list_pages": false, // Disable listing of existing pages
+    //     "chrome-devtools-mcp_select_page": true,
+    //     "chrome-devtools-mcp_close_page": true,
+    //     "chrome-devtools-mcp_take_snapshot": true, // PRIMARY tool for reading pages
+    //     // INTERACTION TOOLS (ENABLED)
+    //     "chrome-devtools-mcp_click": true,
+    //     "chrome-devtools-mcp_fill": true,
+    //     "chrome-devtools-mcp_fill_form": true,
+    //     "chrome-devtools-mcp_hover": true,
+    //     "chrome-devtools-mcp_press_key": true,
+    //     "chrome-devtools-mcp_handle_dialog": true,
+    //     "chrome-devtools-mcp_wait_for": true,
+    //     "chrome-devtools-mcp_upload_file": true,
+    //     "chrome-devtools-mcp_drag": true,
+    //     // UTILITY TOOLS
+    //     "chrome-devtools-mcp_take_screenshot": true,
+    //     "chrome-devtools-mcp_resize_page": true,
+    //     "chrome-devtools-mcp_emulate": true,
+    //     // ADVANCED/DEBUGGING TOOLS (Optional - enable if needed)
+    //     "chrome-devtools-mcp_list_console_messages": true,
+    //     "chrome-devtools-mcp_get_console_message": true,
+    //     "chrome-devtools-mcp_list_network_requests": true,
+    //     "chrome-devtools-mcp_get_network_request": true,
+    //     "chrome-devtools-mcp_performance_start_trace": true,
+    //     "chrome-devtools-mcp_performance_stop_trace": true,
+    //     "chrome-devtools-mcp_performance_analyze_insight": true,
+    //     // DOM ACCESS TOOLS (DISABLED - Use accessibility snapshot instead!)
+    //     "chrome-devtools-mcp_evaluate_script": false, // Don't read DOM directly
+    //     "webfetch*": false, // disable webfetch tool
+    //     "task*": false // disable delegation
+    //   }
+    // },
   },
   "mcp": {
     "chrome-devtools-mcp": {
@@ -139,8 +140,8 @@
         "gpt-5.1-codex",
         "claude-haiku-4-5",
         "claude-opus-4-5",
-        "gemini-3-pro",
-        "claude-sonnet-4-5",
+        // "gemini-3-pro",
+        // "claude-sonnet-4-5",
         // "kimi-k2-thinking",
         "gpt-5.1",
         "gpt-5-nano",
