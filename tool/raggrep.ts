@@ -22,9 +22,11 @@ export default tool({
       .optional()
       .describe("Filter by file extension (e.g., ts, tsx, js)"),
     filter: tool.schema
-      .string()
+      .array(tool.schema.string())
       .optional()
-      .describe("Filter by path prefix (e.g., src/auth)"),
+      .describe(
+        "Filter by path prefix or glob pattern. Multiple filters use OR logic. Examples: 'src/auth', '*.ts', '*.md', 'src/**/*.test.ts'"
+      ),
   },
   async execute(args) {
     const cmdArgs = [args.query];
@@ -38,8 +40,10 @@ export default tool({
     if (args.type !== undefined) {
       cmdArgs.push("--type", args.type);
     }
-    if (args.filter !== undefined) {
-      cmdArgs.push("--filter", args.filter);
+    if (args.filter !== undefined && args.filter.length > 0) {
+      for (const f of args.filter) {
+        cmdArgs.push("--filter", f);
+      }
     }
 
     const result = await Bun.$`raggrep query ${cmdArgs}`.text();
