@@ -16,13 +16,15 @@
       // "model": "github-copilot/claude-opus-4.5",
       "prompt": "{file:./prompts/build.md}"
     },
-    "tweak": {
+    "fast": {
       "mode": "primary",
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "github-copilot/claude-haiku-4.5",
+      "prompt": "{file:./prompts/build.md}"
     },
     "free": {
       "mode": "primary",
-      "model": "opencode/big-pickle"
+      "model": "opencode/big-pickle",
+      "prompt": "{file:./prompts/build.md}"
     },
     "writer": {
       "mode": "primary",
