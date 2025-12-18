@@ -16,20 +16,20 @@
       // "model": "github-copilot/claude-opus-4.5",
       "prompt": "{file:./prompts/build.md}"
     },
-    "fast": {
+    "precise": {
       "mode": "primary",
-      "model": "github-copilot/claude-haiku-4.5",
-      "prompt": "{file:./prompts/build.md}"
+      "model": "github-copilot/gemini-3-flash-preview",
+      "prompt": "{file:./prompts/precise-prompt.md}"
     },
+    // "fast": {
+    //   "mode": "primary",
+    //   "model": "github-copilot/claude-haiku-4.5",
+    //   "prompt": "{file:./prompts/build.md}"
+    // },
     "free": {
       "mode": "primary",
       "model": "opencode/big-pickle",
       "prompt": "{file:./prompts/build.md}"
-    },
-    "precise": {
-      "mode": "primary",
-      "model": "opencode/big-pickle",
-      "prompt": "{file:./prompts/precise-prompt.md}"
     },
     "writer": {
       "mode": "primary",
