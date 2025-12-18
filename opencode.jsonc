@@ -108,26 +108,27 @@
     //   }
     // },
   },
-  "mcp": {
-    "chrome-devtools-mcp": {
-      "type": "local",
-      "command": [
-        "npx",
-        "chrome-devtools-mcp@latest",
-        "--browser-url=http://127.0.0.1:9222"
-      ],
-    },
-    // "playwright-mcp": {
-    //   "type": "local",
-    //   "command": [
-    //     "npx",
-    //     "@playwright/mcp@latest",
-    //     "--extension"
-    //   ],
-    // },
-  },
+  // "mcp": {
+  //   "chrome-devtools-mcp": {
+  //     "type": "local",
+  //     "command": [
+  //       "npx",
+  //       "chrome-devtools-mcp@latest",
+  //       "--browser-url=http://127.0.0.1:9222"
+  //     ],
+  //   },
+  //   // "playwright-mcp": {
+  //   //   "type": "local",
+  //   //   "command": [
+  //   //     "npx",
+  //   //     "@playwright/mcp@latest",
+  //   //     "--extension"
+  //   //   ],
+  //   // },
+  // },
   "tools": {
-    "chrome-devtools-mcp_*": false
+    "chrome-devtools-mcp_*": false,
+    "task": false
   },
   "keybinds": {
     "session_child_cycle": "ctrl+shift+right",
