@@ -26,6 +26,11 @@
       "model": "opencode/big-pickle",
       "prompt": "{file:./prompts/build.md}"
     },
+    "precise": {
+      "mode": "primary",
+      "model": "opencode/big-pickle",
+      "prompt": "{file:./prompts/precise-prompt.md}"
+    },
     "writer": {
       "mode": "primary",
       "model": "opencode/kimi-k2-thinking",
