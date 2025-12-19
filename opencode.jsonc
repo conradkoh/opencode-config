@@ -15,7 +15,7 @@
     "free": {
       "mode": "primary",
       "model": "opencode/big-pickle",
-      "prompt": "{file:./prompts/build.md}"
+      "prompt": "{file:./prompts/precise-prompt.md}"
     },
     "writer": {
       "mode": "primary",
