@@ -7,25 +7,11 @@
     }
   },
   "agent": {
-    "plan": {
-      "disable": true
-    },
-    "build": {
-      "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4.5",
-      // "model": "github-copilot/claude-opus-4.5",
-      "prompt": "{file:./prompts/build.md}"
-    },
     "precise": {
       "mode": "primary",
-      "model": "github-copilot/gemini-3-flash-preview",
+      "model": "github-copilot/claude-sonnet-4.5",
       "prompt": "{file:./prompts/precise-prompt.md}"
     },
-    // "fast": {
-    //   "mode": "primary",
-    //   "model": "github-copilot/claude-haiku-4.5",
-    //   "prompt": "{file:./prompts/build.md}"
-    // },
     "free": {
       "mode": "primary",
       "model": "opencode/big-pickle",
@@ -35,6 +21,12 @@
       "mode": "primary",
       "model": "opencode/kimi-k2-thinking",
       "description": "An agent specialized in writing well crafted words",
+    },
+    "build": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
     },
     // "deep-research": {
     //   "mode": "primary",
