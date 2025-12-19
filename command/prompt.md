@@ -1,84 +1,80 @@
-# Prompt Writing Guidelines
+# System Prompt Writing Guidelines
 
-This document specifies the rules for creating prompts.
+## Philosophy
 
-## Core Requirements
+System prompts should be crafted with nuance and flexibility rather than strict rules. The goal is to create agents that generalize well across scenarios while maintaining consistent behavioral traits.
 
-### 1. Clarity and Conciseness
+## Identity
 
-Prompts MUST be clear and concise.
+The foundation of any system prompt is establishing who the agent fundamentally is. Identity shapes behavior more effectively than rigid rules. Key dimensions to consider:
 
-### 2. Requirement Specification Language
+* **Curiosity**: How naturally inquisitive is the agent? Does it question assumptions and explore edge cases?
+* **Detail Orientation**: Where does the agent fall on the spectrum from meticulous to broad-strokes thinking?
+* **Communication Style**: Preferred verbosity, directness, and clarity in interactions
+* **Theoretical vs Pragmatic**: Balance between abstract reasoning and practical implementation
+* **Visionary vs Present-Focused**: Long-term strategic thinking versus immediate problem-solving
+* **Proactive vs Reactive**: Initiative in suggesting improvements versus waiting for explicit direction
 
-Prompts MUST use RFC 2119 keywords to indicate requirement levels:
+These traits are not binary choices but exist on spectrums. The art of prompt engineering lies in finding the right combination that produces natural, helpful behavior across diverse scenarios.
 
-- **MUST** / **REQUIRED** / **SHALL**: Absolute requirement
-- **MUST NOT** / **SHALL NOT**: Absolute prohibition
-- **SHOULD** / **RECOMMENDED**: Strong recommendation, exceptions MAY exist
-- **SHOULD NOT** / **NOT RECOMMENDED**: Strong discouragement, exceptions MAY exist
-- **MAY** / **OPTIONAL**: Truly optional behavior
+## Understanding User Goals (Two Time Horizons)
 
-**Example:**
+A good system prompt should encourage the agent to understand the user’s intent at two levels:
 
-```
-The system MUST validate all input parameters.
-The system SHOULD log operations for debugging.
-The system MAY cache results for performance.
-```
+1. **Immediate goal (definition of done)**
 
-### 3. Process Flow Diagrams
+   * Inferred from the latest user message.
+   * Typically contains ~80% of what the expected outcome is.
+   * Always the #1 priority: it sets the definition of done — no more, no less.
 
-Prompts MUST use Mermaid flowcharts to showcase steps that need to execute in sequence.
+2. **Broader goal (contextual intent)**
+   * Inferred from the full conversation history.
+   * More nuanced, and often explains constraints, tone preferences, and what “good” looks like.
+   * Useful guiding questions:
+     * “Why is the user giving me this instruction?”
+     * “Of all times, why now?”
+     * “Of all topics, why this topic?”
 
-**Example:**
+Try to satisfy the immediate goal precisely, while using the broader goal to make better trade-offs, ask better clarifying questions, and avoid misalignment.
 
-```mermaid
-flowchart TD
-    A[Receive request] --> B{Validate input}
-    B -->|Invalid| C[Return error]
-    B -->|Valid| D[Process request]
-    D --> E[Save to database]
-    E --> F[Return success]
-```
+## Definition Of Done (Concrete Deliverables)
 
-## Mermaid Flowchart Syntax
+A good system prompt encourages the agent to translate abstract principles into concrete, verifiable deliverables.
 
-### Basic Elements
+* **Set clear goals**: Define outcomes the agent can actually achieve within the current context.
+* **Prefer value-bearing increments**: Aim for deliverables that the user can evaluate after meaningful progress, not after every micro-decision.
+* **Manage complexity explicitly**: Task complexity rises with:
+  * the number of variable factors, and
+  * the number of decisions required to produce the outcome.
+    As decision count increases, the chance of getting something “wrong” (or merely preference-mismatched) rises.
+* **Sequence decisions sensibly**: Encourage the agent to decide what it wants to do first, then execute, then ask for validation at natural checkpoints—so the user can confirm direction without discarding lots of work.
+* **Avoid question-paralysis**: Clarifying questions are useful, but over-asking is annoying; the right balance depends on the task.
 
-```mermaid
-flowchart TD
-    A[Rectangle: Process step]
-    B{Diamond: Decision point}
-    C([Rounded: Start/End])
-    D[(Database operation)]
-```
+In general, prompts should steer the agent toward concrete deliverables that bring value to the user.
 
-### Connections
+## Preventing Scope Creep And Unwanted State Changes
 
-```mermaid
-flowchart TD
-    A[Step 1] --> B[Step 2]
-    B -->|Condition| C[Step 3]
-    B -->|Alternative| D[Step 4]
-```
+A good system prompt should encourage the agent to be scope-disciplined and thoughtful about changes that persist.
 
-### Example: Multi-step Process
+* **Stick to the facts**: Prefer grounded, checkable claims (file paths, function names, class names, command outputs) over speculation.
+* **Treat stateful actions as costly**: File writes, git commits, and external service calls create persistence and cleanup work.
+* **Prefer “think/say” over “write” when unsure**: If content is exploratory, keep it in reasoning/output first; write to disk only when it’s clearly useful and stable.
+* **Be explicit about git history**: Encourage the agent to understand what it is committing to history and to avoid unnecessary churn.
+* **Organize files as maps, not encyclopedias**: Files should point to other sources of truth rather than duplicate every detail; avoid generating lots of verbose documents.
+* **Optimize for how users consume outputs**: Use concise structure (bullets, occasional tables), consistent formatting, and provide helpful links to relevant files/URLs when appropriate.
+* **Avoid common annoyances**: Don’t be sloppy—avoid deeply nested lists, inconsistent formatting, and unstructured walls of text, especially when the result is persistent.
 
-```mermaid
-flowchart TD
-    Start([Start]) --> Input[Receive input]
-    Input --> Validate{Valid?}
-    Validate -->|No| Error[Return error]
-    Validate -->|Yes| Process[Process data]
-    Process --> Save[(Save to database)]
-    Save --> Success[Return success]
-    Error --> End([End])
-    Success --> End
-```
+## Principles
 
----
+1. **Behavior over Rules**: Define desired behaviors through identity rather than enumerating every possible scenario
+2. **Nuanced Trade-offs**: Acknowledge that traits exist in tension with each other and require careful balancing
+3. **Contextual Adaptation**: The same identity can express differently depending on the situation
+4. **Scalable Patterns**: Focus on patterns that generalize rather than case-by-case instructions
+
+***
 
 <!-- Ignore section if arguments are not replaced -->
+
 <userinput>
 $ARGUMENTS
 </userinput>
