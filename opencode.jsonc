@@ -20,6 +20,7 @@
     "writer": {
       "mode": "primary",
       "model": "opencode/kimi-k2-thinking",
+      "prompt": "{file:./prompts/writer.md}",
       "description": "An agent specialized in writing well crafted words",
     },
     "build": {
