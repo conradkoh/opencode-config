@@ -18,6 +18,7 @@
       // "model": "opencode/glm-4.7-free",
       "model": "vercel/minimax/minimax-m2.1",
       "prompt": "{file:./prompts/precise-prompt.md}"
+      "prompt": "{file:./prompts/king.md}"
     },
     "writer": {
       "mode": "primary",
