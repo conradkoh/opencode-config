@@ -13,8 +13,19 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
       // Send notification when session becomes idle (completed)
       if (event.type === "session.idle") {
         const projectName = path.basename(directory)
+        const termProgram = process.env.TERM_PROGRAM || "vscode"
+
+        // Determine editor based on TERM_PROGRAM
+        // Note: Unfortunately, Cursor also returns "vscode" for TERM_PROGRAM
+        // TODO: When Cursor provides a unique TERM_PROGRAM value, update mapping
+        const editorMap: Record<string, { command: string; name: string }> = {
+          vscode: { command: "code", name: "VS Code" },
+          cursor: { command: "cursor", name: "Cursor" },
+        }
+
+        const editor = editorMap[termProgram] || editorMap.vscode
         const title = "OpenCode"
-        const message = `${projectName} - Session completed! Click to open in VS Code`
+        const message = `${projectName} - Session completed! Click to open in ${editor.name}`
 
         // Send cross-platform notification with click handler
         notifier.notify(
@@ -30,7 +41,7 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
 
         // Listen for click events (alternative way to handle interactions)
         notifier.on("click", () => {
-          exec(`code --reuse-window "${directory}"`, () => {})
+          exec(`${editor.command} --reuse-window "${directory}"`, () => {})
         })
 
         notifier.on("timeout", () => {
