@@ -28,11 +28,12 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
         const message = `${projectName} - Session completed! Click to open in ${editor.name}`
 
         // Send cross-platform notification with click handler
+        // Note: Custom icons are not supported on macOS due to limitations
+        // See: https://github.com/mikaelbr/node-notifier/issues/71
         notifier.notify(
           {
             title,
             message,
-            icon: path.join(__dirname, "../assets/icons/vscode.png"),
             wait: true, // Wait for user interaction
             sound: true, // Play notification sound
           },
