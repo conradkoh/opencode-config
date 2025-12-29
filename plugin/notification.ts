@@ -18,47 +18,16 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
             wait: true, // Wait for user interaction
             sound: true, // Play notification sound
           },
-          (err, response) => {
-            if (err) {
-              console.error("Notification error:", err)
-              return
-            }
-
-            // If user clicked the notification, open VS Code
-            if (response === "activate") {
-              exec(`code --reuse-window "${directory}"`, (error) => {
-                if (error) {
-                  console.error("Failed to open VS Code:", error)
-                }
-              })
-            }
-          }
+          () => {} // Silent error handling
         )
 
         // Listen for click events (alternative way to handle interactions)
-        notifier.on("click", (notifierObject, options) => {
-          exec(`code --reuse-window "${directory}"`, (error) => {
-            if (error) {
-              console.error("Failed to open VS Code:", error)
-            }
-          })
+        notifier.on("click", () => {
+          exec(`code --reuse-window "${directory}"`, () => {})
         })
 
-        notifier.on("timeout", (notifierObject, options) => {
-          // Notification closed without interaction
-          console.log("Notification closed without interaction")
-        })
-      }
-
-      // Optional: Send notification when a file is edited
-      if (event.type === "file.edited") {
-        const title = "OpenCode"
-        const message = "File edited"
-
-        notifier.notify({
-          title,
-          message,
-          sound: true,
+        notifier.on("timeout", () => {
+          // Notification closed without interaction - silent
         })
       }
     },
