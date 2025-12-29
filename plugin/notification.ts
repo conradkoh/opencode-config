@@ -12,8 +12,9 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
     event: async ({ event }) => {
       // Send notification when session becomes idle (completed)
       if (event.type === "session.idle") {
+        const projectName = path.basename(directory)
         const title = "OpenCode"
-        const message = "Session completed! Click to open in VS Code"
+        const message = `${projectName} - Session completed! Click to open in VS Code`
 
         // Send cross-platform notification with click handler
         notifier.notify(
