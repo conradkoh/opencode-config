@@ -1,6 +1,11 @@
 import type { Plugin } from "@opencode-ai/plugin"
 import notifier from "node-notifier"
 import { exec } from "child_process"
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export const NotificationPlugin: Plugin = async ({ project, client, $, directory, worktree }) => {
   return {
@@ -15,6 +20,7 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
           {
             title,
             message,
+            icon: path.join(__dirname, "../assets/icons/vscode.png"),
             wait: true, // Wait for user interaction
             sound: true, // Play notification sound
           },
