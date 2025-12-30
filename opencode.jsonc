@@ -37,22 +37,22 @@
     },
   },
   "formatter": {
-    "prettier": {
-      "command": [
-        "pnpx",
-        "pretter@3.7.4",
-        "--write",
-        "$FILE"
-      ],
-      "extensions": [
-        ".js",
-        ".ts",
-        ".jsx",
-        ".tsx",
-        ".json",
-        ".jsonc"
-      ]
-    },
+    // "prettier": {
+    //   "command": [
+    //     "pnpx",
+    //     "pretter@3.7.4",
+    //     "--write",
+    //     "$FILE"
+    //   ],
+    //   "extensions": [
+    //     ".js",
+    //     ".ts",
+    //     ".jsx",
+    //     ".tsx",
+    //     ".json",
+    //     ".jsonc"
+    //   ]
+    // },
     "markdown": {
       "command": [
         "pnpx",
