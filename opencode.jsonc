@@ -58,6 +58,8 @@
         "pnpx",
         "remark-cli@12.0.1",
         "$FILE",
+        "--rc-path",
+        "./remarkrc",
         "--output"
       ],
       "extensions": [
