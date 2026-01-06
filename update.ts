@@ -8,7 +8,7 @@ import { tmpdir } from 'os';
 // Configuration
 const REMOTE_URL = "https://github.com/conradkoh/opencode-config.git";
 const SOURCE_PATHS = ["tool", "skill", "plugin", "command", "prompts"];
-const SPECIAL_FILES = ["package.json", "bun.lock"];
+const SPECIAL_FILES = ["package.json", "bun.lock", "update.ts"];
 const BACKUP_DIR = ".backup";
 
 // Get current timestamp for backups
@@ -79,7 +79,7 @@ function mergePackageJson(sourceFile: string, destFile: string, backupDir: strin
   logSuccess("package.json merged successfully");
 }
 
-// Copy directory with conflict resolution (rename existing files)
+// Copy directory with conflict resolution (backup to .backup directory)
 function copyDirectory(src: string, dest: string, backupDir: string): void {
   if (!existsSync(src)) {
     logWarn(`Source directory does not exist: ${src}`);
@@ -98,17 +98,12 @@ function copyDirectory(src: string, dest: string, backupDir: string): void {
     if (stat.isDirectory()) {
       copyDirectory(srcPath, destPath, join(backupDir, entry));
     } else {
-      // If file exists, rename it before copying
+      // If file exists, backup to .backup directory before copying
       if (existsSync(destPath)) {
-        const timestamp = getTimestamp();
-        const backupPath = join(dirname(destPath), `${entry}.backup-${timestamp}`);
-        logInfo(`File exists: ${destPath}, renaming to ${backupPath}`);
-        renameSync(destPath, backupPath);
-        
-        // Also copy to backup directory
         const structuredBackupPath = join(backupDir, entry);
         mkdirSync(dirname(structuredBackupPath), { recursive: true });
-        cpSync(destPath + '.backup-' + timestamp, structuredBackupPath);
+        cpSync(destPath, structuredBackupPath);
+        logInfo(`Backed up: ${destPath} -> ${structuredBackupPath}`);
       }
       
       cpSync(srcPath, destPath);
@@ -171,6 +166,17 @@ async function update(): Promise<void> {
         }
         cpSync(srcFile, destFile);
         logSuccess(`${file} updated successfully`);
+      } else if (file === 'update.ts') {
+        // Self-update the script
+        if (existsSync(destFile)) {
+          const backupPath = join(BACKUP_PATH, file);
+          cpSync(destFile, backupPath);
+          logInfo(`Backed up ${file} to ${backupPath}`);
+        }
+        cpSync(srcFile, destFile);
+        // Preserve executable permission
+        execSync(`chmod +x "${destFile}"`);
+        logSuccess(`${file} updated successfully (self-update)`);
       }
     }
     
