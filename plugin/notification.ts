@@ -41,11 +41,11 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
         )
 
         // Listen for click events (alternative way to handle interactions)
-        notifier.on("click", () => {
+        notifier.once("click", () => {
           exec(`${editor.command} --reuse-window "${directory}"`, () => {})
         })
 
-        notifier.on("timeout", () => {
+        notifier.once("timeout", () => {
           // Notification closed without interaction - silent
         })
       }
