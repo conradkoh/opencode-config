@@ -40,14 +40,22 @@ export const NotificationPlugin: Plugin = async ({ project, client, $, directory
           () => {} // Silent error handling
         )
 
-        // Listen for click events (alternative way to handle interactions)
-        notifier.once("click", () => {
+        // Listen for click events
+        const clickListener = () => {
           exec(`${editor.command} --reuse-window "${directory}"`, () => {})
-        })
+          // Deregister listener after triggering
+          notifier.removeListener("click", clickListener)
+        }
+        notifier.on("click", clickListener)
 
-        notifier.once("timeout", () => {
-          // Notification closed without interaction - silent
-        })
+        // Handle timeout and clean up listeners
+        const timeoutListener = () => {
+          // Notification closed without interaction - remove click listener
+          notifier.removeListener("click", clickListener)
+          // Remove this timeout listener
+          notifier.removeListener("timeout", timeoutListener)
+        }
+        notifier.on("timeout", timeoutListener)
       }
     },
   }
