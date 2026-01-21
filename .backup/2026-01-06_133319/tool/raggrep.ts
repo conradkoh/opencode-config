@@ -1,0 +1,93 @@
+import { tool } from "@opencode-ai/plugin";
+
+/**
+ * Check if raggrep is installed globally
+ */
+async function isRagrepInstalled(): Promise<boolean> {
+  try {
+    const proc = Bun.spawn(['raggrep', '--version'], { stdout: 'pipe', stderr: 'pipe' });
+    await proc.exited;
+    return proc.exitCode === 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Get the installed raggrep version
+ */
+async function getRagrepVersion(): Promise<string | null> {
+  try {
+    const proc = Bun.spawn(['raggrep', '--version'], { stdout: 'pipe', stderr: 'pipe' });
+    const output = await new Response(proc.stdout).text();
+    const match = output.match(/v([\\d.]+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+export default tool({
+  description:
+    "Semantic code search powered by RAG - understands INTENT, not just literal text. Parses code using AST to extract functions, classes, and symbols with full context. Finds relevant code even when exact keywords don't match. Superior to grep for exploratory searches like 'authentication logic', 'error handling patterns', or 'configuration loading'.\\n\\n🎯 USE THIS TOOL FIRST when you need to:\\n• Find WHERE code is located (functions, components, services)\\n• Understand HOW code is structured\\n• Discover RELATED code across multiple files\\n• Get a QUICK overview of a topic\\n\\n❌ DON'T read multiple files manually when you can:\\n  raggrep(\"user authentication\", { filter: [\"src/\"] })\\n\\n✅ INSTEAD of reading files one-by-one, search semantically:\\n  • \"Find the auth middleware\" vs read: auth.ts, middleware.ts, index.ts...\\n  • \"Where are React components?\" vs read: App.tsx, components/*, pages/*...\\n  • \"Database connection logic?\" vs read: db.ts, config.ts, models/*...\\n  • \"Error handling patterns\" vs read: error.ts, middleware.ts, handlers/*...\\n\\nThis saves ~10x tool calls and provides BETTER context by showing related code across the entire codebase.",
+  args: {
+    query: tool.schema
+      .string()
+      .describe(
+        "Natural language search query describing what you want to find. Be specific: 'auth middleware that checks JWT', 'React hooks for data fetching', 'database connection pool config'. This is MUCH faster than reading files manually."
+      ),
+    filter: tool.schema
+      .array(tool.schema.string())
+      .describe(
+        "Array of path prefixes or glob patterns to narrow search scope (OR logic). If user mentions a directory, use it. Otherwise infer from context. Common patterns: ['src/auth'], ['*.tsx', 'components/'], ['api/', 'routes/'], ['docs/', '*.md'], ['*.test.ts']. For broad search use ['src/'] or ['**/*']."
+      ),
+    top: tool.schema
+      .number()
+      .optional()
+      .describe("Number of results to return (default: 10)"),
+    minScore: tool.schema
+      .number()
+      .optional()
+      .describe("Minimum similarity score 0-1 (default: 0.15)"),
+    type: tool.schema
+      .string()
+      .optional()
+      .describe(
+        "Filter by single file extension without dot (e.g., 'ts', 'tsx', 'js', 'md'). Prefer using 'filter' with glob patterns like '*.ts' for more flexibility."
+      ),
+  },
+  async execute(args) {
+    const installed = await isRagrepInstalled();
+
+    if (!installed) {
+      return `Error: raggrep is not installed globally.
+
+Please install raggrep using one of the following commands:
+  npm install -g raggrep@latest
+  pnpm install -g raggrep@latest
+
+After installation, raggrep will be available for use.`;
+    }
+
+    const cmdArgs = [args.query];
+
+    if (args.top !== undefined) {
+      cmdArgs.push("--top", String(args.top));
+    }
+    if (args.minScore !== undefined) {
+      cmdArgs.push("--min-score", String(args.minScore));
+    }
+    if (args.type !== undefined) {
+      cmdArgs.push("--type", args.type);
+    }
+    if (args.filter !== undefined && args.filter.length > 0) {
+      for (const f of args.filter) {
+        cmdArgs.push("--filter", f);
+      }
+    }
+
+    const proc = Bun.spawn(['raggrep', 'query', ...cmdArgs], { stdout: 'pipe' });
+    const result = await new Response(proc.stdout).text();
+    return result.trim();
+  },
+});
