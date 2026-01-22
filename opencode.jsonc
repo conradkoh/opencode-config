@@ -12,8 +12,12 @@
   "agent": {
     "chatroom": {
       "mode": "primary",
-      "model": "github-copilot/claude-opus-4.5",
-      "prompt": "{file:./prompts/chatroom.md}"
+      "model": "github-copilot/claude-sonnet-4.5",
+      "prompt": "{file:./prompts/chatroom.md}",
+      "tools": {
+        "task": false,
+        "grep": false
+      }
     },
     "precise": {
       "mode": "primary",
