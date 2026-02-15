@@ -1,8 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // "small_model": "vercel/minimax/minimax-m2.1",
-  // "small_model": "openrouter/minimax/minimax-m2.1",
-  "small_model": "opencode/glm-4.7-free",
+  "plugin": [
+    "opencode-windsurf-codeium@beta"
+  ],
+  // "small_model": "vercel/minimax/minimax-m2.5",
+  // "small_model": "openrouter/minimax/minimax-m2.5",
+  "small_model": "opencode/big-pickle",
   "tui": {
     // "scroll_speed": 6,
     "scroll_acceleration": {
@@ -10,14 +13,9 @@
     }
   },
   "agent": {
-    "chatroom": {
-      "mode": "primary",
+    "build": {
       "model": "github-copilot/claude-sonnet-4.5",
-      "prompt": "{file:./prompts/chatroom.md}",
-      "tools": {
-        "task": false,
-        "grep": false
-      }
+      "disable": true
     },
     "precise": {
       "mode": "primary",
@@ -27,10 +25,11 @@
     },
     "cheap": {
       "mode": "primary",
-      "model": "opencode/minimax-m2.1-free",
+      // "model": "github-copilot/claude-haiku-4.5",
       // "model": "opencode/glm-4.7-free",
-      // "model": "vercel/minimax/minimax-m2.1",
-      // "model": "openrouter/minimax/minimax-m2.1",
+      "model": "opencode/minimax-m2.5-free",
+      // "model": "vercel/minimax/minimax-m2.5",
+      // "model": "openrouter/minimax/minimax-m2.5",
       "prompt": "{file:./prompts/precise-prompt.md}"
     },
     "writer": {
@@ -38,9 +37,6 @@
       "model": "opencode/kimi-k2-thinking",
       "prompt": "{file:./prompts/writer.md}",
       "description": "An agent specialized in writing well crafted words",
-    },
-    "build": {
-      "disable": true
     },
     "plan": {
       "disable": true
@@ -105,25 +101,10 @@
   },
   "provider": {
     "opencode": {
-      "blacklist": [
-        "qwen3-coder",
-        "claude-opus-4-1",
-        "kimi-k2",
-        "gpt-5.1-codex",
-        "claude-haiku-4-5",
-        "claude-opus-4-5",
-        // "gemini-3-pro",
-        // "claude-sonnet-4-5",
-        // "kimi-k2-thinking",
-        "gpt-5.1",
-        "gpt-5-nano",
-        "gpt-5-codex",
-        // "big-pickle",
-        "claude-3-5-haiku",
-        "glm-4.6",
-        "grok-code",
-        "claude-sonnet-4",
-        "gpt-5"
+      "whitelist": [
+        "big-pickle",
+        "minimax-m2.5-free",
+        "kimi-k2.5-free"
       ]
     },
     "github-copilot": {
@@ -150,14 +131,43 @@
     "openrouter": {
       "whitelist": [
         "z-ai/glm-4.7",
-        "minimax/minimax-m2.1"
+        "minimax/minimax-m2.5",
       ]
     },
     "vercel": {
       "whitelist": [
         "zai/glm-4.7",
-        "minimax/minimax-m2.1"
+        "minimax/minimax-m2.5"
       ]
+    },
+    "windsurf": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:42100/v1"
+      },
+      "models": {
+        "swe-1.5": {
+          "name": "SWE 1.5 (Windsurf)",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-4.5-sonnet": {
+          "name": "Claude 4.5 Sonnet (Windsurf)",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        },
+        "claude-4.5-opus": {
+          "name": "Claude 4.5 Opus (Windsurf)",
+          "limit": {
+            "context": 200000,
+            "output": 8192
+          }
+        }
+      }
     }
   }
 }
