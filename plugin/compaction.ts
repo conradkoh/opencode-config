@@ -22,7 +22,13 @@ Your summary must include:
 
 Keep it concise but preserve all critical context. Prioritize instructions and constraints over history.
 
-In the summary, remind the agent to study the current changes to remember the context, and then continue with accomplishing the user's goal.`.trim();
+In the summary, remind the agent to study the current changes to remember the context, and then continue with accomplishing the user's goal.
+
+NOTE: If were chatroom agent, you need to preserve the system prompt for the next agent, as well as add a reminder at the end to wait for tasks. Include your knowledge of these 2 commands:
+1. Gaining Context using the chatroom context read command
+2. Wait for task command
+
+Include the CHATROOM_CONVEX_URL parameter as well if present.`.trim();
     },
   }
 }

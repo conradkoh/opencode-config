@@ -13,21 +13,28 @@
     }
   },
   "agent": {
+    "chatroom": {
+      "model": "github-copilot/claude-sonnet-4.6",
+      "prompt": "{file:./prompts/chatroom.md}",
+      "tools": {
+        "question": false
+      }
+    },
     "build": {
-      "model": "github-copilot/claude-sonnet-4.5",
+      "model": "github-copilot/claude-sonnet-4.6",
       "disable": true
     },
     "precise": {
       "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4.5",
+      "model": "github-copilot/claude-sonnet-4.6",
       // "model": "github-copilot/claude-opus-4.5",
       "prompt": "{file:./prompts/precise-prompt.md}"
     },
     "cheap": {
       "mode": "primary",
       // "model": "github-copilot/claude-haiku-4.5",
-      // "model": "opencode/glm-4.7-free",
-      "model": "opencode/minimax-m2.5-free",
+      "model": "opencode/glm-5-free",
+      // "model": "opencode/minimax-m2.5-free",
       // "model": "vercel/minimax/minimax-m2.5",
       // "model": "openrouter/minimax/minimax-m2.5",
       "prompt": "{file:./prompts/precise-prompt.md}"
@@ -104,10 +111,14 @@
       "whitelist": [
         "big-pickle",
         "minimax-m2.5-free",
+        "glm-5-free",
         "kimi-k2.5-free"
       ]
     },
     "github-copilot": {
+      "models": {
+        "gpt-5.3-codex": {}
+      },
       "blacklist": [
         "grok-code-fast-1",
         "gpt-5.1-codex",
