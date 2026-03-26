@@ -6,20 +6,14 @@
   // "small_model": "vercel/minimax/minimax-m2.5",
   // "small_model": "openrouter/minimax/minimax-m2.5",
   "small_model": "opencode/big-pickle",
-  "tui": {
-    // "scroll_speed": 6,
-    "scroll_acceleration": {
-      "enabled": true
-    }
-  },
   "agent": {
-    "chatroom": {
-      "model": "github-copilot/claude-sonnet-4.6",
-      "prompt": "{file:./prompts/chatroom.md}",
-      "tools": {
-        "question": false
-      }
-    },
+    // "chatroom": {
+    //   "model": "github-copilot/claude-sonnet-4.6",
+    //   "prompt": "{file:./prompts/chatroom.md}",
+    //   "tools": {
+    //     "question": false
+    //   }
+    // },
     "build": {
       "model": "github-copilot/claude-sonnet-4.6",
       "disable": true
@@ -28,12 +22,15 @@
       "mode": "primary",
       "model": "github-copilot/claude-sonnet-4.6",
       // "model": "github-copilot/claude-opus-4.5",
-      "prompt": "{file:./prompts/precise-prompt.md}"
+      "prompt": "{file:./prompts/precise-prompt.md}",
+      "tools": {
+        "question": false
+      }
     },
     "cheap": {
       "mode": "primary",
       // "model": "github-copilot/claude-haiku-4.5",
-      "model": "opencode/glm-5-free",
+      "model": "opencode/big-pickle",
       // "model": "opencode/minimax-m2.5-free",
       // "model": "vercel/minimax/minimax-m2.5",
       // "model": "openrouter/minimax/minimax-m2.5",
@@ -102,16 +99,13 @@
     "chrome-devtools-mcp_*": false,
     "task": false
   },
-  "keybinds": {
-    "session_child_cycle": "ctrl+shift+right",
-    "session_child_cycle_reverse": "ctrl+shift+left",
-  },
   "provider": {
     "opencode": {
       "whitelist": [
         "big-pickle",
         "minimax-m2.5-free",
         "glm-5-free",
+        "glm-5",
         "kimi-k2.5-free"
       ]
     },

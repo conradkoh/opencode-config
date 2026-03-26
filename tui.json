@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "keybinds": {
+    "session_child_cycle": "ctrl+shift+right",
+    "session_child_cycle_reverse": "ctrl+shift+left"
+  },
+  "scroll_acceleration": {
+    "enabled": true
+  }
+}
