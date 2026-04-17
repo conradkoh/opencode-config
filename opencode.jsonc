@@ -15,14 +15,24 @@
     },
     "planner": {
       "mode": "primary",
+      "model": "opencode/big-pickle",
+      "prompt": "{file:./prompts/planner.md}",
+      "description": "An agent that breaks down problems systematically and delegates to sub-agents"
+    },
+    "ultraplanner": {
+      "mode": "primary",
       "model": "openrouter/anthropic/claude-opus-4.7",
       "prompt": "{file:./prompts/planner.md}",
-      "description": "An agent that breaks down problems systematically and delegates to sub-agents",
+      "description": "An agent that breaks down complex problems with deep reasoning and delegates to sub-agents",
       "permission": {
         "write": "deny",
         "question": "deny",
         "todowrite": "deny"
       }
+    },
+    "general": {
+      "mode": "subagent",
+      "model": "github-copilot/claude-haiku-4.5"
     },
     "plan": {
       "disable": true
