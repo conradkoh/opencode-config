@@ -3,66 +3,32 @@
   "plugin": [
     "opencode-windsurf-codeium@beta"
   ],
-  // "small_model": "vercel/minimax/minimax-m2.5",
-  // "small_model": "openrouter/minimax/minimax-m2.5",
   "small_model": "opencode/big-pickle",
   "agent": {
-    // "chatroom": {
-    //   "model": "github-copilot/claude-sonnet-4.6",
-    //   "prompt": "{file:./prompts/chatroom.md}",
-    //   "tools": {
-    //     "question": false
-    //   }
-    // },
     "build": {
       "model": "github-copilot/claude-sonnet-4.6",
-      "disable": true
-    },
-    "precise": {
-      "mode": "primary",
-      "model": "github-copilot/claude-sonnet-4.6",
-      // "model": "github-copilot/claude-opus-4.5",
-      "prompt": "{file:./prompts/precise-prompt.md}",
-      "tools": {
-        "question": false
-      }
     },
     "cheap": {
       "mode": "primary",
-      // "model": "github-copilot/claude-haiku-4.5",
       "model": "opencode/big-pickle",
-      // "model": "opencode/minimax-m2.5-free",
-      // "model": "vercel/minimax/minimax-m2.5",
-      // "model": "openrouter/minimax/minimax-m2.5",
       "prompt": "{file:./prompts/precise-prompt.md}"
     },
-    "writer": {
+    "planner": {
       "mode": "primary",
-      "model": "opencode/kimi-k2-thinking",
-      "prompt": "{file:./prompts/writer.md}",
-      "description": "An agent specialized in writing well crafted words",
+      "model": "openrouter/anthropic/claude-opus-4.7",
+      "prompt": "{file:./prompts/planner.md}",
+      "description": "An agent that breaks down problems systematically and delegates to sub-agents",
+      "permission": {
+        "write": "deny",
+        "question": "deny",
+        "todowrite": "deny"
+      }
     },
     "plan": {
       "disable": true
     },
   },
   "formatter": {
-    // "prettier": {
-    //   "command": [
-    //     "pnpx",
-    //     "pretter@3.7.4",
-    //     "--write",
-    //     "$FILE"
-    //   ],
-    //   "extensions": [
-    //     ".js",
-    //     ".ts",
-    //     ".jsx",
-    //     ".tsx",
-    //     ".json",
-    //     ".jsonc"
-    //   ]
-    // },
     "markdown": {
       "command": [
         "pnpx",
@@ -76,28 +42,6 @@
         ".md"
       ]
     }
-  },
-  // "mcp": {
-  //   "chrome-devtools-mcp": {
-  //     "type": "local",
-  //     "command": [
-  //       "npx",
-  //       "chrome-devtools-mcp@latest",
-  //       "--browser-url=http://127.0.0.1:9222"
-  //     ],
-  //   },
-  //   // "playwright-mcp": {
-  //   //   "type": "local",
-  //   //   "command": [
-  //   //     "npx",
-  //   //     "@playwright/mcp@latest",
-  //   //     "--extension"
-  //   //   ],
-  //   // },
-  // },
-  "tools": {
-    "chrome-devtools-mcp_*": false,
-    "task": false
   },
   "provider": {
     "opencode": {
