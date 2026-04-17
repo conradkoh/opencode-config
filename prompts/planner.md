@@ -31,30 +31,18 @@ Where does the state live? Identify all sources of truth:
 | [State B] | [... | ... | ...] |
 | [State C] | [... | ... | ...] |
 
-### 3. Domain Model & Use Cases
-Adopt clean architecture with dependency injection:
+### 3. Domain Model & Dependencies
+(Optional) For complex features, define a well-structured domain model with dependency inversion for testability:
 
-#### Core Entities
-```typescript
-// Domain entities / models
-entity [EntityName] {
-  id: string;
-  [field]: [type];
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
+| Entity / Interface | Responsibility | Notes |
+|-----------------|---------------|-------|
+| [DomainModel] | Core business logic | [Type, key fields] |
+| [RepositoryInterface] | Data access abstraction | [CRUD methods] |
+| [ServiceInterface] | External dependency | [API client, etc] |
 
-#### Use Cases
-| Use Case | Input | Output | Dependencies |
-|---------|-------|--------|--------------|
-| [UseCase1] | [InputType] | [OutputType] | [Repository/Service] |
-| [UseCase2] | [... | ... | ...] |
+**Principle**: Use dependency inversion (interfaces in domain, implementations injected) so the core logic is testable without real databases or external services.
 
-#### Dependency Injection Strategy
-- [Repository interface] → [Implemented by DB]
-- [Service interface] → [Implemented by External API]
-- [UI State] → [Handled by frontend local state]
+> **Skip this section** for simple features (e.g., one-off scripts, CLI tools) — no domain model needed.
 
 ### 4. Layer Changes
 Define what changes in each layer, in execution order:
