@@ -17,7 +17,11 @@
       "mode": "primary",
       "model": "opencode/big-pickle",
       "prompt": "{file:./prompts/planner.md}",
-      "description": "An agent that breaks down problems systematically and delegates to sub-agents"
+      "description": "An agent that breaks down problems systematically and delegates to sub-agents",
+      "permission": {
+        "write": "deny",
+        "edit": "deny"
+      }
     },
     "ultraplanner": {
       "mode": "primary",
