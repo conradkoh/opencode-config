@@ -30,6 +30,7 @@
       "description": "An agent that breaks down complex problems with deep reasoning and delegates to sub-agents",
       "permission": {
         "write": "deny",
+        "edit": "deny",
         "question": "deny",
         "todowrite": "deny"
       }
