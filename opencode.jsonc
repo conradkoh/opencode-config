@@ -4,16 +4,22 @@
   "small_model": "opencode/big-pickle",
   "agent": {
     "build": {
-      "model": "github-copilot/claude-sonnet-4.6",
+      "model": "opencode-go/deepseek-v4-pro",
+      "permission": {
+        "task": "deny"
+      }
     },
     "cheap": {
       "mode": "primary",
-      "model": "opencode/big-pickle",
-      "prompt": "{file:./prompts/precise-prompt.md}"
+      "model": "opencode-go/deepseek-v4-flash",
+      "prompt": "{file:./prompts/precise-prompt.md}",
+      "permission": {
+        "task": "deny"
+      }
     },
     "planner": {
       "mode": "primary",
-      "model": "/z-ai/glm-5.1",
+      "model": "opencode-go/deepseek-v4-pro",
       "prompt": "{file:./prompts/planner.md}",
       "description": "An agent that breaks down problems systematically and delegates to sub-agents",
       "permission": {
@@ -31,9 +37,12 @@
         "edit": "deny"
       }
     },
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash"
+    },
     "general": {
       "mode": "subagent",
-      "model": "github-copilot/claude-haiku-4.5"
+      "model": "opencode-go/deepseek-v4-flash"
     },
     "plan": {
       "disable": true
@@ -64,6 +73,9 @@
       "models": {
         "qwen/qwen3.6-27b": {
           "name": "Qwen 3.6-27B"
+        },
+        "google/gemma-4-e4b": {
+          "name": "Gemma 4-E4B"
         }
       }
     },
@@ -124,6 +136,5 @@
         "minimax/minimax-m2.5"
       ]
     },
-
   }
 }
