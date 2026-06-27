@@ -1,17 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "lmstudio/qwen/qwen3.6-35b-a3b",
   "plugin": [],
   "small_model": "opencode/big-pickle",
   "agent": {
     "build": {
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "lmstudio/qwen/qwen3.6-35b-a3b",
       "permission": {
         "task": "deny"
       }
     },
     "cheap": {
       "mode": "primary",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/kimi-k2.6",
       "prompt": "{file:./prompts/precise-prompt.md}",
       "permission": {
         "task": "deny"
@@ -19,12 +20,12 @@
     },
     "planner": {
       "mode": "primary",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/kimi-k2.6",
       "prompt": "{file:./prompts/planner.md}",
       "description": "An agent that breaks down problems systematically and delegates to sub-agents",
       "permission": {
-        "write": "deny",
-        "edit": "deny"
+        "write": "allow",
+        "edit": "allow"
       }
     },
     "ultraplanner": {
@@ -33,16 +34,16 @@
       "prompt": "{file:./prompts/planner.md}",
       "description": "An agent that breaks down complex problems with deep reasoning and delegates to sub-agents",
       "permission": {
-        "write": "deny",
-        "edit": "deny"
+        "write": "allow",
+        "edit": "allow"
       }
     },
     "explore": {
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/kimi-k2.6"
     },
     "general": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/kimi-k2.6"
     },
     "plan": {
       "disable": true
@@ -66,16 +67,54 @@
   "provider": {
     "lmstudio": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "LM Studio (local)",
+      "name": "LM Studio",
       "options": {
         "baseURL": "http://localhost:1234/v1"
       },
       "models": {
-        "qwen/qwen3.6-27b": {
-          "name": "Qwen 3.6-27B"
+        "qwen/qwen3.6-35b-a3b": {
+          "name": "Qwen 3.6-35B-A3B",
+          "limit": {
+            "context": 128000,
+            "output": 64000
+          }
         },
-        "google/gemma-4-e4b": {
-          "name": "Gemma 4-E4B"
+        "ornith-1.0-35b": {
+          "name": "Ornith 1.0-35B",
+          "limit": {
+            "context": 128000,
+            "output": 64000
+          }
+        }
+      }
+    },
+    "lmstudio-conradkoh.local": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (conradkoh.local)",
+      "options": {
+        "baseURL": "http://conradkoh.local:1234/v1"
+      },
+      "models": {
+        "qwen/qwen3.6-35b-a3b": {
+          "name": "Qwen 3.6-35B-A3B",
+          "limit": {
+            "context": 128000,
+            "output": 64000
+          }
+        },
+        "coherelabs.north-mini-code-1.0": {
+          "name": "Cohere North Mini Code 1.0",
+          "limit": {
+            "context": 128000,
+            "output": 64000
+          }
+        },
+        "ornith-1.0-35b": {
+          "name": "Ornith 1.0-35B",
+          "limit": {
+            "context": 128000,
+            "output": 64000
+          }
         }
       }
     },
@@ -113,17 +152,35 @@
       ]
     },
     "openrouter": {
-      "whitelist": [
-        "anthropic/claude-opus-4.7",
-        "google/gemini-3.1-pro-preview",
-        "google/gemma-4-31b-it",
-        "google/gemma-4-26b-a4b-it",
-        "z-ai/glm-5.1",
-        "z-ai/glm-4.7",
-        "minimax/minimax-m2.5",
-        "deepseek/deepseek-v3.2"
-      ]
+      "models": {
+        "deepseek/deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro (via Deepseek)",
+          "options": {
+            "provider": {
+              "order": [
+                "deepseek"
+              ],
+              "allow_fallbacks": false
+            }
+          }
+        },
+        "nex-agi/nex-n2-pro:free": {
+          "name": "Nex N2 Pro (Free)"
+        }
+      }
     },
+    // "openrouter": {
+    //   "whitelist": [
+    //     "anthropic/claude-opus-4.7",
+    //     "google/gemini-3.1-pro-preview",
+    //     "google/gemma-4-31b-it",
+    //     "google/gemma-4-26b-a4b-it",
+    //     "z-ai/glm-5.1",
+    //     "z-ai/glm-4.7",
+    //     "minimax/minimax-m2.5",
+    //     "deepseek/deepseek-v3.2"
+    //   ]
+    // },
     "nvidia": {
       "whitelist": []
     },
